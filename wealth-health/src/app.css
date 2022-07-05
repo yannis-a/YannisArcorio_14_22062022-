@@ -63,3 +63,31 @@ legend {
 .react-datepicker-wrapper {
     width: auto !important;
 }
+
+.table,
+.ag-theme-alpine {
+    width: 1024px !important;
+    height: 720px !important;
+}
+.search {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.ag-header-cell-text{
+    white-space: break-spaces!important;
+    text-align: center;
+}
+.table-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.returnAtHome{
+    position: relative;
+    bottom: 0;
+    margin-top: 70px;
+    padding-bottom: 20px;
+}

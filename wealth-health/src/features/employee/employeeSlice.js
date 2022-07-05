@@ -10,7 +10,7 @@ const initialState = [
     city: "England",
     state: "Lincolnshire",
     zipCode: "",
-    department: "",
+    department: "Phi",
   },
   {
     firstName: "Albert",
@@ -21,8 +21,8 @@ const initialState = [
     city: "German",
     state: "Kingdom of Württemberg",
     zipCode: "",
-    department: "",
-  },
+    department: "Phy",
+  }
 ];
 
 export const employeeSlice = createSlice({
