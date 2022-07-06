@@ -1,28 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import Select from "react-select";
 import Modal from "reactal";
 import { useAppDispatch } from "../hook";
-import {
-  addEmployee,
-  selectEmployees,
-} from "../features/employee/employeeSlice";
+import { addEmployee } from "../features/employee/employeeSlice";
 import { US_STATES, DEPARTMENT, MONTHS, YEARS } from "../data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useSelector } from "react-redux";
 import { Formik } from "formik";
 
 const Form = () => {
   const dispatch = useAppDispatch();
-  const employees = useSelector(selectEmployees);
-  console.log(employees);
-
   const [state, setState] = useState("");
   const [department, setDepartment] = useState("");
   const [startDate, setStartDate] = useState();
   const [birthDay, setBirthDay] = useState();
   const [show, setShow] = useState(false);
+
+  const [today, setToday] = useState(false);
 
   const changeState = (value) => {
     setState(value);
@@ -31,10 +26,19 @@ const Form = () => {
     setDepartment(value);
   };
 
+  useEffect(() => {
+    const allDay = Array.from(
+      document.querySelectorAll("div.react-datepicker__day")
+    );
+    allDay.forEach((d) => {
+      d.classList.remove("react-datepicker__day--keyboard-selected");
+    });
+  }, [today, setToday]);
+
   return (
     <div className="main">
       <div className="title">
-        <h1>HRNet</h1>
+        <h1>HRnet</h1>
       </div>
       <div className="container">
         <a href="/employees">View Current Employees</a>
@@ -52,9 +56,9 @@ const Form = () => {
             department: "",
           }}
           onSubmit={(values, { setSubmitting }) => {
-              setShow(true);
-              dispatch(addEmployee(values));
-              setSubmitting(false);
+            setShow(true);
+            dispatch(addEmployee(values));
+            setSubmitting(false);
           }}
         >
           {({ values, handleSubmit, isSubmitting, handleChange }) => (
@@ -104,7 +108,12 @@ const Form = () => {
                     </button>
                     <button
                       onClick={(e) => {
-                        setBirthDay(new Date());
+                        var date = new Date();
+                        setBirthDay(date);
+                        values.birthDay = date.toLocaleDateString("en");
+                        changeYear(date.getFullYear());
+                        changeMonth(date.getMonth());
+                        setToday(true);
                         return e.preventDefault();
                       }}
                     >
@@ -148,6 +157,7 @@ const Form = () => {
                 selected={birthDay}
                 onChange={(date) => {
                   setBirthDay(date);
+                  setToday(false);
                   values.birthDay = date.toLocaleDateString("en");
                 }}
               />
@@ -181,7 +191,12 @@ const Form = () => {
                     </button>
                     <button
                       onClick={(e) => {
-                        setStartDate(new Date());
+                        var date = new Date();
+                        setStartDate(date);
+                        values.startDate = date.toLocaleDateString("en");
+                        changeYear(date.getFullYear());
+                        changeMonth(date.getMonth());
+                        setToday(true);
                         return e.preventDefault();
                       }}
                     >
@@ -226,6 +241,7 @@ const Form = () => {
                 selected={startDate}
                 onChange={(date) => {
                   setStartDate(date);
+                  setToday(false);
                   values.startDate = date.toLocaleDateString("en");
                 }}
               />
@@ -256,7 +272,7 @@ const Form = () => {
                   value={state}
                   onChange={(e) => {
                     changeState(e);
-                    values.state = e.label;
+                    values.state = e.value;
                   }}
                 />
                 <label htmlFor="zipCode">Zip Code</label>
@@ -276,8 +292,7 @@ const Form = () => {
                 value={department}
                 onChange={(e) => {
                   changeDepartment(e);
-                  console.log(e);
-                  values.department = e.label
+                  values.department = e.label;
                 }}
               />
 

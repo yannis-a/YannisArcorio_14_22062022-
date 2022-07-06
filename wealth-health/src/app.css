@@ -14,12 +14,10 @@ form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 33%;
 }
 
 fieldset {
     display: block;
-    width: 100%;
     margin-inline-start: 2px;
     margin-inline-end: 2px;
     padding-block-start: 0.35em;

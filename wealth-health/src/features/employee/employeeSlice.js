@@ -8,7 +8,7 @@ const initialState = [
     startDate: "02/06/1705",
     street: "",
     city: "England",
-    state: "Lincolnshire",
+    state: "LS",
     zipCode: "",
     department: "Phi",
   },
@@ -19,7 +19,7 @@ const initialState = [
     startDate: "18/09/1901",
     street: "",
     city: "German",
-    state: "Kingdom of Württemberg",
+    state: "KW",
     zipCode: "",
     department: "Phy",
   }

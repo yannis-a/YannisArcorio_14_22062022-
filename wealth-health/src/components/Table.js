@@ -7,14 +7,14 @@ const Table = (data) => {
   // states
   const [rowData] = useState(data.data);
   const [columnDefs] = useState([
-    { field: "firstName" },
-    { field: "lastName" },
+    { field: "firstName" , flex : 1.2},
+    { field: "lastName" , flex : 1.2},
     { field: "startDate", flex: 1.2 },
     { field: "department", flex: 1.2 },
     { headerName: "Date of Birth", field: "birthDay", flex: 1.2 },
     { field: "street", flex: 1.5 },
     { field: "city", flex: 1.2 },
-    { field: "state", flex: 1.2 },
+    { field: "state", flex: 0.8 },
     { field: "zipCode" },
   ]);
 
